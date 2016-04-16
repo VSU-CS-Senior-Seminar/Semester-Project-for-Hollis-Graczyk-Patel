@@ -2,12 +2,16 @@
   
   <div class="entry text-left">
         
-        <h4><u><%= broadcast.title %></u></h4>
-        <p><%= sanitize(broadcast.content) %></p>
-        <p>Posted by: <%= (User.find_by(id: broadcast.user_id)).email %></p>
+        <h4 class="text-center" ><u><%= broadcast.title %></u></h4>
+        <p class="text-center"><%= sanitize(broadcast.content) %></p>
+        <p class="text-center">Posted by: <%= (User.find_by(id: broadcast.user_id)).email %></p>
         <% if broadcast.user_id == current_user.id %>
+        <p class="text-center">
           <%= link_to 'Edit', edit_business_message_path(broadcast) %>
+        </p>
+        <p class="text-center">
           <%= link_to 'Destroy', broadcast, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </p>
         <% end %>
   </div>
   

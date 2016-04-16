@@ -28,7 +28,7 @@ class EventCommentsController < ApplicationController
     
     respond_to do |format|
       if @event_comment.save
-        format.html { redirect_to @event_comment, notice: 'Event comment was successfully created.' }
+        format.html { redirect_to event_path(Event.find_by(id: @event_comment.event_id)) }
         format.json { render :show, status: :created, location: @event_comment }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class EventCommentsController < ApplicationController
   def update
     respond_to do |format|
       if @event_comment.update(event_comment_params)
-        format.html { redirect_to @event_comment, notice: 'Event comment was successfully updated.' }
+        format.html { redirect_to event_path(Event.find_by(id: @event_comment.event_id)) }
         format.json { render :show, status: :ok, location: @event_comment }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class EventCommentsController < ApplicationController
   def destroy
     @event_comment.destroy
     respond_to do |format|
-      format.html { redirect_to event_comments_url, notice: 'Event comment was successfully destroyed.' }
+      format.html { redirect_to event_path(Event.find_by(id: @event_comment.event_id)) }
       format.json { head :no_content }
     end
   end

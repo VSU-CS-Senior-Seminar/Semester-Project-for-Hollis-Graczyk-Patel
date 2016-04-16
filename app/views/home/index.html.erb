@@ -3,117 +3,188 @@
 <% end %>
 
 
+<style>
+  #all{
+    height: 500px;
+    overflow-y: scroll;
+  }
+  #sale {
+    height: 500px;
+    overflow-y: scroll;
+  }
+  #jobs{
+    height: 500px;
+    overflow-y: scroll;
+  }
+  #lnf {
+    height: 500px;
+    overflow-y: scroll;
+  }
+  #general{
+    height: 500px;
+    overflow-y: scroll;
+  }
+  #alert {
+    height: 500px;
+    overflow-y: scroll;
+  }
+  .entry{
+    border: 1px solid;
+    border-radius: 25px;
+  }
+  
+</style>
 <h1><u>Message Board</u></h1>
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#all"><b>All</b></a></li>
-  <li><a data-toggle="tab" href="#urgent"><b>Urgent</b></a></li>
-  <li><a data-toggle="tab" href="#news"><b>News</b></a></li>
-  <li><a data-toggle="tab" href="#job"><b>Job</b></a></li>
-  <li><a data-toggle="tab" href="#event"><b>Event</b></a></li>
+  <li><a data-toggle="tab" href="#sale"><b>Sale</b></a></li>
+  <li><a data-toggle="tab" href="#jobs"><b>Jobs</b></a></li>
+  <li><a data-toggle="tab" href="#lnf"><b>Lost & Found</b></a></li>
+  <li><a data-toggle="tab" href="#general"><b>General</b></a></li>
+  <li><a data-toggle="tab" href="#alert"><b>Alert</b></a></li>
 </ul>
 <div class="tab-content">
   <div id="all" class="tab-pane fade in active">
     <% @messages.reverse.each do |message| %>
       <div class="entry text-left">
-        <h3><u><%= link_to message.title,message_path(message) %></u></h3>
-        <p><%= sanitize(message.content) %></p>
-        <p>Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
-        
+        <h3 class="text-center"><u><%= link_to message.title,message_path(message) %></u></h3>
+        <p class="text-center" ><%= sanitize(message.content) %></p>
+        <p class="text-center" >Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
+        <p class="text-center" >
         <%= link_to "Like", like_message_path(message), method: :put  %>
           
               <span class="badge"><%= message.get_upvotes.size %></span>
-
+        </p>
+        <p class="text-center">
           <%= link_to "UnLike", unlike_message_path(message), method: :put  %>
           
               <span class="badge"><%= message.get_downvotes.size %></span>
-          </button>
-          <%# end %>
+        </p>
+           
       </div>
+      <br>
     <% end %>
   </div>
-  <div id="urgent" class="tab-pane fade">
+  <div id="sale" class="tab-pane fade">
     <% @messages.reverse.each do |message| %>
-      <% if message.category == "Urgent" %>
+      <% if message.category == "Sale" %>
       <div class="entry text-left">
-        <h3><%= link_to message.title,message_path(message) %></h3>
-        <p><%= sanitize(message.content) %></p>
-        <p>Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
+        <h3 class="text-center" ><%= link_to message.title,message_path(message) %></h3>
+        <p class="text-center"><%= sanitize(message.content) %></p>
+        <p class="text-center">Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
+        <p class="text-center">
         <%= link_to "Like", like_message_path(message), method: :put  %>
           
               <span class="badge"><%= message.get_upvotes.size %></span>
+        </p>
+        <p class="text-center">
 
           <%= link_to "UnLike", unlike_message_path(message), method: :put  %>
           
               <span class="badge"><%= message.get_downvotes.size %></span>
-          </button>
+          </p>
        
       </div>
+      <br>
       <% end %>
     <% end %>
   </div>
-  <div id="news" class="tab-pane fade">
+  <div id="jobs" class="tab-pane fade">
     <% @messages.reverse.each do |message| %>
-      <% if message.category == "News" %>
+      <% if message.category == "Jobs" %>
       <div class="entry text-left">
-        <h3><%= link_to message.title,message_path(message) %></h3>
-        <p><%= sanitize(message.content) %></p>
-        <p>Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
+        <h3 class="text-center"><%= link_to message.title,message_path(message) %></h3>
+        <p class="text-center"><%= sanitize(message.content) %></p>
+        <p class="text-center">Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
+        <p class="text-center">
         <%= link_to "Like", like_message_path(message), method: :put  %>
           
               <span class="badge"><%= message.get_upvotes.size %></span>
-
+        </p>
+        <p class="text-center">
           <%= link_to "UnLike", unlike_message_path(message), method: :put  %>
           
               <span class="badge"><%= message.get_downvotes.size %></span>
-          </button>
+        </p> 
         
       </div>
+      <br>
       <% end %>
     <% end %>
   </div>
-  <div id="job" class="tab-pane fade">
+  <div id="lnf" class="tab-pane fade">
     <% @messages.reverse.each do |message| %>
-      <% if message.category == "Job" %>
+      <% if message.category == "Lost & Found" %>
       <div class="entry text-left">
-        <h3><%= link_to message.title,message_path(message) %></h3>
-        <p><%= sanitize(message.content) %></p>
-        <p>Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
+        <h3 class="text-center"><%= link_to message.title,message_path(message) %></h3>
+        <p class="text-center"><%= sanitize(message.content) %></p>
+        <p class="text-center">Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
+        <p class="text-center">
         <%= link_to "Like", like_message_path(message), method: :put  %>
           
               <span class="badge"><%= message.get_upvotes.size %></span>
-
+        </p>
+        <p class="text-center">
           <%= link_to "UnLike", unlike_message_path(message), method: :put  %>
           
               <span class="badge"><%= message.get_downvotes.size %></span>
-          </button>
+        </p>
         
       </div>
+      <br>
       <% end %>
     <% end %>
   </div>
-  <div id="event" class="tab-pane fade">
+  <div id="general" class="tab-pane fade">
     <% @messages.reverse.each do |message| %>
-      <% if message.category == "Event" %>
+      <% if message.category == "General" %>
       <div class="entry text-left">
-        <h3><%= link_to message.title,message_path(message) %></h3>
-        <p><%= sanitize(message.content) %></p>
-        <p>Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
+        <h3 class="text-center"><%= link_to message.title,message_path(message) %></h3>
+        <p class="text-center"><%= sanitize(message.content) %></p>
+        <p class="text-center">Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
+        <p class="text-center">
         <%= link_to "Like", like_message_path(message), method: :put  %>
           
               <span class="badge"><%= message.get_upvotes.size %></span>
-
+        </p>
+        <p class="text-center">
           <%= link_to "UnLike", unlike_message_path(message), method: :put  %>
           
               <span class="badge"><%= message.get_downvotes.size %></span>
-          </button>
+        </p>  
         
       </div>
+      <br>
       <% end %>
     <% end %>
   </div>
+  <div id="alert" class="tab-pane fade">
+    <% @messages.reverse.each do |message| %>
+      <% if message.category == "Alert" %>
+      <div class="entry text-left">
+        <h3 class="text-center"><%= link_to message.title,message_path(message) %></h3>
+        <p class="text-center"><%= sanitize(message.content) %></p>
+        <p class="text-center">Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
+        <p class="text-center">
+        <%= link_to "Like", like_message_path(message), method: :put  %>
+          
+              <span class="badge"><%= message.get_upvotes.size %></span>
+        </p>
+        <p class="text-center">
+          <%= link_to "UnLike", unlike_message_path(message), method: :put  %>
+          
+              <span class="badge"><%= message.get_downvotes.size %></span>
+        </p>
+        
+      </div>
+      <br>
+      <% end %>
+    <% end %>
+  </div>
+  
 </div>
 <% if current_user.role != "Business" %>
-<p>
+<p class="text-center">
   <%= button_to('Post New Message', new_message_path, :method => :get, class: "btn btn-small btn-default") %>
 </p>
 <% end %>

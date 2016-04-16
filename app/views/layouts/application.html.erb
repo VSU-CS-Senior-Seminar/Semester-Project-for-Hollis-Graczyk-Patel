@@ -16,27 +16,22 @@
     background: linear-gradient(315deg, rgba(255,0,0,0), rgba(255,255,255,255), rgba(255,0,0,0));  
   
 }
-</style>
- <style>
-.col-sm-3 { 
-     
-     
-}
-</style>
-<style>
+ 
 .row { 
     height: 100%;
     width: 100%; 
 }
-</style>
  
-<style>
 .well { 
 
     background: linear-gradient(to right, rgba(255,0,0,0), rgba(255,255,255,255), rgba(255,0,0,0)); 
     color: #000000;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+ #business{
+    height: 500px;
+    overflow-y: scroll;
+  }
 </style>
 <body class='<%= controller.controller_name %>'>
   <div class="jumbotron text-center"> 
@@ -96,11 +91,14 @@
       <p>
         
        <div class="well">
+          
          <h2><u>Business Broadcasts</u></h2>
-          <div class="tab-content">
+          <div id="business">
+           <div class="tab-content">
             <p>
               <%= render partial: "business_messages/broadcasts", locals: {broadcasts: BusinessMessage.all} %>
             </p>
+           </div>
           </div>
        </div>
        <% end %>
