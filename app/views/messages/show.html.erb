@@ -1,6 +1,12 @@
+<style>
+  #comments{
+    height: 250px;
+    overflow-y: scroll;
+  }
+</style>
 <p id="notice"><%= notice %></p>
 
-<div class="lol text-left">
+<div class="entry text-center">
   <p>
     <strong>Title:</strong>
     <%= @message.title %>
@@ -22,8 +28,9 @@
 </div>
 
 <h3>Comments:</h3>
-<%= render @message.comments %>
-
+<div id="comments">
+  <%= render @message.comments %>
+</div>
 <h3>Reply to Message:</h3>
 <%= render 'comments/form' %>
 

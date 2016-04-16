@@ -2,12 +2,17 @@
   .entry{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background-color: white;
+    
+  }
+   #comments{
+    height: 250px;
+    overflow-y: scroll;
   }
 </style>
 
 <p id="notice"><%= notice %></p>
 
-<div class="lol text-left">
+<div class="entry text-center">
   <p>
     <strong>Name:</strong>
     <%= @event.name %>
@@ -25,6 +30,7 @@
 </div>
 
 <h3>Comments:</h3>
+<div id="comments">
   <% @event_comments.reverse.each do |comment| %>
     <% if comment.event_id == @event.id %>
       <div class="entry text-center">
@@ -37,6 +43,7 @@
       <% end %>
     <% end %>
   <% end %>
+</div>
 <h3>Comment On Event:</h3>
   <%= render 'event_comments/form', eventId: @event.id %>
 
