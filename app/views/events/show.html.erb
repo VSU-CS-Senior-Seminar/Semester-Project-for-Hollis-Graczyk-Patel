@@ -1,19 +1,28 @@
+<style>
+  .entry{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: white;
+  }
+</style>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
-
-<p>
-  <strong>Start time:</strong>
-  <%= @event.start_time %>
-</p>
- 
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p> 
+<div class="lol text-left">
+  <p>
+    <strong>Name:</strong>
+    <%= @event.name %>
+  </p>
+  
+  <p>
+    <strong>Start time:</strong>
+    <%= @event.start_time %>
+  </p>
+   
+  <p>
+    <strong>Description:</strong>
+    <%= @event.description %>
+  </p> 
+</div>
 
 <h3>Comments:</h3>
   <% @event_comments.reverse.each do |comment| %>
