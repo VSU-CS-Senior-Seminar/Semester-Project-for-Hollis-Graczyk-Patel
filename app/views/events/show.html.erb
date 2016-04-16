@@ -14,5 +14,22 @@
   <strong>Description:</strong>
   <%= @event.description %>
 </p> 
+
+<h3>Comments:</h3>
+  <% @event_comments.reverse.each do |comment| %>
+    <% if comment.event_id == @event.id %>
+      <div class="entry text-center">
+        <p> <%= comment.content %> </p>
+        <p>Posted by: <%= (User.find_by(id: comment.user_id)).name %> <%= time_ago_in_words(comment.created_at) %> ago</p>
+      </div>
+      <% if comment.user_id == current_user.id %>
+        <%= link_to "Edit", edit_event_comment_path(comment)  %>
+        <%= link_to "Delete", comment, method: :delete, data: {confirm: "Are you sure?"} %>
+      <% end %>
+    <% end %>
+  <% end %>
+<h3>Comment On Event:</h3>
+  <%= render 'event_comments/form', eventId: @event.id %>
+
  
 <%= link_to 'Back', home_calendar_path %>
