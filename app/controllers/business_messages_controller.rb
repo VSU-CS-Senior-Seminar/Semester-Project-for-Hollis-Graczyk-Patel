@@ -1,5 +1,8 @@
 class BusinessMessagesController < ApplicationController
   before_action :set_business_message, only: [:show, :edit, :update, :destroy]
+  before_action :business_check, only: [:index, :show]
+  before_action :new_business, only: [:new]
+  before_action :check_your_business, only: [:edit]
 
   # GET /business_messages
   # GET /business_messages.json
@@ -74,5 +77,28 @@ class BusinessMessagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def business_message_params
       params.require(:business_message).permit(:title, :content, :user_id)
+    end
+    
+    def business_check
+      if current_user.role != "Admin" 
+        if current_user.role != "Lead"
+          flash[:notice] = 'You do not have the proper access'
+          redirect_to home_path
+        end
+      end
+    end
+    
+    def new_business
+      if current_user.role != "Business" 
+         flash[:notice] = 'You cannot access that page'
+         redirect_to home_path
+      end
+    end
+    
+    def check_your_business
+      if  (BusinessMessage.find_by(user_id: current_user.id, id: @business_message.id)) == nil
+        flash[:notice] = 'You cannot edit that business message'
+        redirect_to home_path
+      end
     end
 end

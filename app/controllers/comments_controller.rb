@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
 	before_action :find_message
 	before_action :find_comment, only: [:edit, :update, :destroy]
+	before_action :check_your_comment, only: [:edit]
 	def create
 		
 		@comment = @message.comments.create(comment_params)
@@ -41,5 +42,14 @@ class CommentsController < ApplicationController
 
 	def find_comment
 		@comment = @message.comments.find(params[:id])
-	end	
+	end
+	
+ 	
+ 	def check_your_comment
+ 		if (Comment.find_by(user_id: current_user.id, id: @comment.id)) == nil
+ 			flash[:notice] = "You cannot access that page"
+ 			redirect_to home_path
+ 		end
+ 	end
+    
 end

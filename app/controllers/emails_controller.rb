@@ -1,5 +1,6 @@
-eclass EmailsController < ApplicationController
+class EmailsController < ApplicationController
   before_action :set_email, only: [:show, :edit, :update, :destroy]
+  before_action :check_emails, only: [:index, :show, :new, :edit]
 
   # GET /emails
   # GET /emails.json
@@ -76,5 +77,14 @@ eclass EmailsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def email_params
       params.require(:email).permit(:email, :content)
+    end
+ 
+    def check_emails
+      if current_user.role != "Lead" 
+        if current_user.role != "Admin"
+          flash[:notice] = "You cannot access that page"
+          redirect_to home_path
+        end
+      end
     end
 end
