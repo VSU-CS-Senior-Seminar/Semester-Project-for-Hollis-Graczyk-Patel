@@ -1,5 +1,7 @@
 class PrivateMessagesController < ApplicationController
   before_action :set_private_message, only: [:show, :edit, :update, :destroy]
+  before_action :moderator_only, only: [:index, :show, :edit]
+  before_action :no_business, only: [:new]
   layout "profile"
 
   # GET /private_messages
@@ -79,4 +81,21 @@ class PrivateMessagesController < ApplicationController
     def private_message_params
       params.require(:private_message).permit(:to, :content, :user_id)
     end
+    
+    def moderator_only
+      if current_user.role != "Lead" 
+        if current_user.role != "Admin"
+          flash[:notice] = "You are not authorized to view this page"
+          redirect_to home_path
+        end
+      end
+    end 
+    
+    def no_business
+      if current_user.role == "Business"
+        flash[:notice] = "Account not authorized for this action"
+        redirect_to home_path
+      end
+    end
+    
 end

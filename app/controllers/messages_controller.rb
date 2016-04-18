@@ -1,5 +1,8 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
+  before_action :moderator_only, only: [:index]
+  before_action :no_business, only: [:new]
+  before_action :your_message, only: [:edit]
 
   # GET /messages
   # GET /messages.json
@@ -103,4 +106,28 @@ class MessagesController < ApplicationController
     def message_params
       params.require(:message).permit(:title, :content, :category, :user_id)
     end
+    
+    def moderator_only
+      if current_user.role != "Lead" 
+        if current_user.role != "Admin"
+          flash[:notice] = "You are not authorized to view this page"
+          redirect_to home_path
+        end
+      end
+    end 
+    
+    def no_business
+      if current_user.role == "Business"
+        flash[:notice] = "Account not authorized for this action"
+        redirect_to home_path
+      end
+    end
+    
+    def your_message
+      if (Message.find_by(user_id: current_user.id, id: @message.id)) == nil
+        flash[:notice] = "You cannot edit that message"
+        redirect_to home_path
+      end
+    end
+    
 end

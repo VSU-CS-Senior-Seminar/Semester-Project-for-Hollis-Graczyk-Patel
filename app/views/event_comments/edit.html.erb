@@ -2,5 +2,4 @@
 
 <%= render 'edit_form' %>
 
-<%= link_to 'Show', @event_comment %> |
-<%= link_to 'Back', event_comments_path %>
+<%= link_to 'Back', event_path(Event.find_by(id: @event_comment.event_id)) %>

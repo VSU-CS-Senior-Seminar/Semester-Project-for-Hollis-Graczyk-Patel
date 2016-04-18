@@ -1,11 +1,12 @@
 class MembershipsController < ApplicationController
   before_action :set_membership, only: [:show, :edit, :update, :destroy]
+  before_action :moderator_only, only: [:index, :show, :edit]
+  before_action :no_business, only: [:new]
   
 
   # GET /memberships
   # GET /memberships.json
   def index
-    
     @memberships = Membership.all
   end
 
@@ -17,10 +18,9 @@ class MembershipsController < ApplicationController
   # GET /memberships/new
   def new
     @membership = Membership.new
-    @userInfo = User.where.not(id: current_user)
+    @userInfo = User.where.not(id: current_user, role: 2)
     @userEmail = Array.new
     @userInfo.each do |user|
-      
       @userEmail.push(user.email)
     end
   
@@ -73,7 +73,7 @@ class MembershipsController < ApplicationController
   def destroy
     @membership.destroy
     respond_to do |format|
-      format.html { redirect_to memberships_url, notice: 'Membership was successfully destroyed.' }
+      format.html { redirect_to groups_path, notice: 'Membership was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -89,7 +89,20 @@ class MembershipsController < ApplicationController
       params.require(:membership).permit(:user_id, :group_id, :email, :title)
     end
     
-    def setIds
-      
+    def moderator_only
+      if current_user.role != "Lead" 
+        if current_user.role != "Admin"
+          flash[:notice] = "You are not authorized to view this page"
+          redirect_to home_path
+        end
+      end
+    end 
+    
+    def no_business
+      if current_user.role == "Business"
+        flash[:notice] = "Account not authorized for this action"
+        redirect_to home_path
+      end
     end
+    
 end

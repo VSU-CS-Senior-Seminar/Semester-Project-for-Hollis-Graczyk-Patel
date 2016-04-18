@@ -1,4 +1,6 @@
 class EmailsController < ApplicationController
+  layout "profile"
+  
   before_action :set_email, only: [:show, :edit, :update, :destroy]
   before_action :check_emails, only: [:index, :show, :new, :edit]
 

@@ -1,5 +1,8 @@
 class EventsController < ApplicationController
+  layout "profile"
+  
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :moderator_only, only: [:index, :new, :edit]
 
   # GET /events
   # GET /events.json
@@ -73,4 +76,13 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(:name, :start_time, :description)
     end
+    
+    def moderator_only
+      if current_user.role != "Lead" 
+        if current_user.role != "Admin"
+          flash[:notice] = "You are not authorized to manipulate events"
+          redirect_to home_path
+        end
+      end
+    end 
 end

@@ -1,6 +1,9 @@
 class EventCommentsController < ApplicationController
   before_action :set_event_comment, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_event_comments, only: [:index, :show]
+  before_action :bad_pages, only: [:new]
+  before_action :your_comment, only: [:edit]
+  
   # GET /event_comments
   # GET /event_comments.json
   def index
@@ -71,4 +74,26 @@ class EventCommentsController < ApplicationController
     def event_comment_params
       params.require(:event_comment).permit(:content, :user_id, :event_id)
     end
+    
+    def check_event_comments
+      if current_user.role != "Lead" 
+        if current_user.role != "Admin"
+          flash[:notice] = "You cannot access that page"
+          redirect_to home_path
+        end
+      end
+    end
+    
+    def bad_pages
+      flash[:notice] = "You cannot access this page"
+      redirect_to home_path
+    end
+    
+    def your_comment
+      if (EventComment.find_by(user_id: current_user.id, id: @event_comment.id)) == nil
+        flash[:notice] = "You cannot edit that comment"
+        redirect_to home_path
+      end
+    end
+    
 end

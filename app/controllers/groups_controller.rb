@@ -1,7 +1,8 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
   before_action :check_your_group, only: [:show]
-  
+  before_action :no_business, only: [:index, :new]
+  before_action :group_owner, only: [:edit]
 
   # GET /groups
   # GET /groups.json
@@ -81,10 +82,23 @@ class GroupsController < ApplicationController
     end
     
     def check_your_group
-     
       if  (Membership.find_by(user_id: current_user.id, group_id: @group.id)) == nil
         flash[:notice] = 'You cannot access that group'
-        redirect_to groups_path
+        redirect_to home_path
+      end
+    end
+    
+    def no_business
+      if current_user.role == "Business"
+        flash[:notice] = "Account not authorized for this action"
+        redirect_to home_path
+      end
+    end
+    
+    def group_owner
+      if (Group.find_by(user_id: current_user.id, id: @group.id)) == nil
+        flash[:notice] = "You cannot edit that group"
+        redirect_to home_path
       end
     end
     

@@ -1,5 +1,8 @@
 class GroupMessagesController < ApplicationController
   before_action :set_group_message, only: [:show, :edit, :update, :destroy]
+  before_action :moderator_only, only: [:index, :show]
+  before_action :your_message, only: [:edit]
+  before_action :no_business, only: [:new]
 
   # GET /group_messages
   # GET /group_messages.json
@@ -87,5 +90,28 @@ class GroupMessagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_message_params
       params.require(:group_message).permit(:group_id, :group_name, :content)
+    end
+    
+    def moderator_only
+      if current_user.role != "Lead" 
+        if current_user.role != "Admin"
+          flash[:notice] = "You are not authorized to view this page"
+          redirect_to home_path
+        end
+      end
+    end 
+    
+    def your_message
+      if (GroupMessage.find_by(user_id: current_user.id, id: @group_message.id)) == nil
+        flash[:notice] = "You cannot edit that comment"
+        redirect_to home_path
+      end
+    end
+    
+    def no_business
+      if current_user.role == "Business"
+        flash[:notice] = "Account not authorized for this action"
+        redirect_to home_path
+      end
     end
 end

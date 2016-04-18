@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
-  #before_action :authenticate_user!
+  before_action :no_business, only: [:profile]
+  before_action :moderator_only, only: [:leadCandidates, :currentLeads, :userDirectory]
+  
   layout "profile", only: [:profile, :leadCandidates, :currentLeads, :userDirectory]
   
   def index
@@ -66,5 +68,23 @@ class HomeController < ApplicationController
     lead.update_column(:role, 0)
     redirect_to home_currentLeads_path
   end
+  
+  private
+  
+    def no_business
+      if current_user.role == "Business"
+        flash[:notice] = "Account not authorized for this action"
+        redirect_to home_path
+      end
+    end
+    
+    def moderator_only
+      if current_user.role != "Lead" 
+        if current_user.role != "Admin"
+          flash[:notice] = "You are not authorized to view this page"
+          redirect_to home_path
+        end
+      end
+    end 
  
 end

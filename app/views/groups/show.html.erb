@@ -1,5 +1,5 @@
 <style>
-  .entry2{
+  .entry{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background-color: white;
   }
@@ -18,9 +18,25 @@
 
 <p>
   <strong>Members:</strong>
-  <% @memberships.each do |member| %>
-    <% if member.group_id == @group.id %>
-      <p><%= member.email %> </p>
+  <% if current_user.id == @group.user_id %>
+    <% @memberships.each do |member| %>
+      <% if member.group_id == @group.id %>
+        <p><%= member.email %>     
+          <% if @group.user_id != User.find_by(email: member.email).id %>
+            <%= link_to 'Leave Group', Membership.find_by(user_id: (User.find_by(email: member.email).id), group_id: @group.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </p>
+      <% end %>
+    <% end %>
+  <% else %>
+    <% @memberships.each do |member| %>
+      <% if member.group_id == @group.id %>
+        <p><%= member.email %>     
+          <% if current_user.id == User.find_by(email: member.email).id %>
+            <%= link_to 'Leave Group', Membership.find_by(user_id: (User.find_by(email: member.email).id), group_id: @group.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </p>
+      <% end %>
     <% end %>
   <% end %>
 </p>
