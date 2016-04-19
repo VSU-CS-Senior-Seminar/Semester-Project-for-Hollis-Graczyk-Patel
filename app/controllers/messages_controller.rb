@@ -29,6 +29,8 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
     @message.user_id = current_user.id
+    points = current_user.points + 3
+    current_user.update_column(:points, points)
     respond_to do |format|
       if @message.save
         format.html { redirect_to home_path, notice: 'Message was successfully created.' }

@@ -34,6 +34,8 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     @group.user_id = current_user.id
+    points = current_user.points + 4
+    current_user.update_column(:points, points)
     respond_to do |format|
       if @group.save
         format.html { redirect_to groups_path, notice: 'Group was successfully created.' }
