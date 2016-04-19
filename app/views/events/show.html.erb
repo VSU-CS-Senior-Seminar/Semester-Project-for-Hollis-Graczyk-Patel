@@ -2,6 +2,8 @@
   .entry{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background-color: white;
+    border: 1px solid;
+    border-radius: 25px;
     
   }
    #comments{
@@ -42,6 +44,7 @@
         <%= link_to "Delete", comment, method: :delete, data: {confirm: "Are you sure?"} %>
       <% end %>
     <% end %>
+    <br>
   <% end %>
 </div>
 <h3>Comment On Event:</h3>

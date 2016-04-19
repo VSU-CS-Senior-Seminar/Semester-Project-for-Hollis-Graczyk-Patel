@@ -66,7 +66,7 @@ class PrivateMessagesController < ApplicationController
   def destroy
     @private_message.destroy
     respond_to do |format|
-      format.html { redirect_to private_messages_url, notice: 'Private message was successfully destroyed.' }
+      format.html { redirect_to home_profile_path, notice: 'Private message was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

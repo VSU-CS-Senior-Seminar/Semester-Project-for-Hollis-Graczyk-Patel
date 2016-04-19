@@ -2,6 +2,25 @@
 <p id="notice"><%= notice %></p>
 <% end %>
 
+<style>
+  #userMessages {
+    height: 500px;
+    overflow-y: scroll;
+  }
+  #inbox {
+    height: 500px;
+    overflow-y: scroll;
+  }
+  #bookmarks {
+    height: 500px;
+    overflow-y: scroll;
+  }
+  .entry{
+    border: 1px solid;
+    border-radius: 25px;
+    background-color: white;
+  }
+</style>
 
 <h1>Your Profile</h1>
 <ul class="nav nav-tabs">
@@ -12,29 +31,33 @@
 <div class="tab-content">
   <div id="userMessages" class="tab-pane fade in active">
     <% @userMessages.reverse.each do |message| %>
-      <div class="entry text-left">
+      <div class="entry text-center">
         <h3><u><%= link_to message.title,message_path(message) %></u></h3>
         <p><%= sanitize(message.content) %></p>
         <p>Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
         
       </div>
+      <br>
     <% end %>
   </div>
   <div id="inbox" class="tab-pane fade">
     <% @inbox.reverse.each do |message| %>
-      <div class="entry text-left">
+      <div class="entry text-center">
         <h3><u>From: <%= (User.find_by(id: message.user_id)).email %></u></h3>
         <p><%= sanitize(message.content) %></p>
+        <p><%= link_to 'Delete Message', message, method: :delete, data: { confirm: 'Are you sure?' } %><p>
       </div>
+      <br>
     <% end %>
   </div>
   <div id="bookmarks" class="tab-pane fade">
     <% @userBookmarks.reverse.each do |message| %>
-      <div class="entry text-left">
+      <div class="entry text-center">
         <h3><u><%= link_to message.title,message_path(message) %></u></h3>
         <p><%= sanitize(message.content) %></p>
         <p>Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
       </div>
+      <br>
     <% end %>
   </div>
 </div>

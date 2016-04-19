@@ -3,6 +3,14 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background-color: white;
   }
+  .messages {
+    height: 250px;
+    overflow-y: scroll;
+  }
+  #members {
+    height: 50px;
+    overflow-y: scroll;
+  }
 </style>
 <p id="notice"><%= notice %></p>
 
@@ -18,6 +26,7 @@
 
 <p>
   <strong>Members:</strong>
+  <div id="members">
   <% if current_user.id == @group.user_id %>
     <% @memberships.each do |member| %>
       <% if member.group_id == @group.id %>
@@ -39,11 +48,12 @@
       <% end %>
     <% end %>
   <% end %>
+  </div>
 </p>
-<div class="entry text-center">
+<div class="messages text-center">
     <% @allGroupMessages.each do |message| %>
       <% if message.group_id == @group.id %>
-      <div class = "entry2 text-center">
+      <div class = "entry text-center">
         <p><%= sanitize(message.content) %></p>
         <p>Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
         <% if message.user_id == current_user.id %>
@@ -54,6 +64,7 @@
         <% end %>
       </div>
       <% end %>
+      <br>
     <% end %>
 </div>
 
