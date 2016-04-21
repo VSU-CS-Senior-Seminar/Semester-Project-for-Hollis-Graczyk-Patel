@@ -51,16 +51,20 @@
         <p class="text-center" ><%= sanitize(message.content) %></p>
         <p class="text-center" >Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
         <p class="text-center" >
-        <%= link_to "Like", like_message_path(message), method: :put  %>
+        <%= link_to "Like", like_message_path(message), method: :put, class: "btn btn-xs btn-default"   %>
           
               <span class="badge"><%= message.get_upvotes.size %></span>
         </p>
         <p class="text-center">
-          <%= link_to "UnLike", unlike_message_path(message), method: :put  %>
+          <%= link_to "UnLike", unlike_message_path(message), method: :put, class: "btn btn-xs btn-default"   %>
           
               <span class="badge"><%= message.get_downvotes.size %></span>
         </p>
-           
+          <% if (message.user_id == current_user.id) || (current_user.role == "Lead") || (current_user.role == "Admin") %>
+          <p class ="text-center">
+            <%= link_to "Delete", message, method: :delete, data:  { confirm: 'Are you sure?' },  class: "btn btn-small btn-default" %>
+            </p>
+          <% end %>
       </div>
       <br>
     <% end %>
@@ -73,17 +77,21 @@
         <p class="text-center"><%= sanitize(message.content) %></p>
         <p class="text-center">Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
         <p class="text-center">
-        <%= link_to "Like", like_message_path(message), method: :put  %>
+        <%= link_to "Like", like_message_path(message), method: :put, class: "btn btn-xs btn-default"  %>
           
               <span class="badge"><%= message.get_upvotes.size %></span>
         </p>
         <p class="text-center">
 
-          <%= link_to "UnLike", unlike_message_path(message), method: :put  %>
+          <%= link_to "UnLike", unlike_message_path(message), method: :put, class: "btn btn-xs btn-default" %>
           
               <span class="badge"><%= message.get_downvotes.size %></span>
           </p>
-       
+          <% if (message.user_id == current_user.id) || (current_user.role == "Lead") || (current_user.role == "Admin") %>
+          <p class ="text-center">
+            <%= link_to "Delete", message, method: :delete, data:  { confirm: 'Are you sure?' },  class: "btn btn-small btn-default" %>
+            </p>
+          <% end %>
       </div>
       <br>
       <% end %>
@@ -97,16 +105,20 @@
         <p class="text-center"><%= sanitize(message.content) %></p>
         <p class="text-center">Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
         <p class="text-center">
-        <%= link_to "Like", like_message_path(message), method: :put  %>
+        <%= link_to "Like", like_message_path(message), method: :put, class: "btn btn-xs btn-default"  %>
           
               <span class="badge"><%= message.get_upvotes.size %></span>
         </p>
         <p class="text-center">
-          <%= link_to "UnLike", unlike_message_path(message), method: :put  %>
+          <%= link_to "UnLike", unlike_message_path(message), method: :put,  class: "btn btn-xs btn-default" %>
           
               <span class="badge"><%= message.get_downvotes.size %></span>
         </p> 
-        
+        <% if (message.user_id == current_user.id) || (current_user.role == "Lead") || (current_user.role == "Admin") %>
+          <p class ="text-center">
+            <%= link_to "Delete", message, method: :delete, data:  { confirm: 'Are you sure?' },  class: "btn btn-small btn-default" %>
+            </p>
+          <% end %>
       </div>
       <br>
       <% end %>
@@ -120,16 +132,20 @@
         <p class="text-center"><%= sanitize(message.content) %></p>
         <p class="text-center">Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
         <p class="text-center">
-        <%= link_to "Like", like_message_path(message), method: :put  %>
+        <%= link_to "Like", like_message_path(message), method: :put, class: "btn btn-xs btn-default"  %>
           
               <span class="badge"><%= message.get_upvotes.size %></span>
         </p>
         <p class="text-center">
-          <%= link_to "UnLike", unlike_message_path(message), method: :put  %>
+          <%= link_to "UnLike", unlike_message_path(message), method: :put, class: "btn btn-xs btn-default"  %>
           
               <span class="badge"><%= message.get_downvotes.size %></span>
         </p>
-        
+        <% if (message.user_id == current_user.id) || (current_user.role == "Lead") || (current_user.role == "Admin") %>
+          <p class ="text-center">
+            <%= link_to "Delete", message, method: :delete, data:  { confirm: 'Are you sure?' },  class: "btn btn-small btn-default" %>
+            </p>
+          <% end %>
       </div>
       <br>
       <% end %>
@@ -143,16 +159,20 @@
         <p class="text-center"><%= sanitize(message.content) %></p>
         <p class="text-center">Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
         <p class="text-center">
-        <%= link_to "Like", like_message_path(message), method: :put  %>
+        <%= link_to "Like", like_message_path(message), method: :put, class: "btn btn-xs btn-default"  %>
           
               <span class="badge"><%= message.get_upvotes.size %></span>
         </p>
         <p class="text-center">
-          <%= link_to "UnLike", unlike_message_path(message), method: :put  %>
+          <%= link_to "UnLike", unlike_message_path(message), method: :put, class: "btn btn-xs btn-default"  %>
           
               <span class="badge"><%= message.get_downvotes.size %></span>
         </p>  
-        
+        <% if (message.user_id == current_user.id) || (current_user.role == "Lead") || (current_user.role == "Admin") %>
+          <p class ="text-center">
+            <%= link_to "Delete", message, method: :delete, data:  { confirm: 'Are you sure?' },  class: "btn btn-small btn-default" %>
+            </p>
+          <% end %>
       </div>
       <br>
       <% end %>
@@ -166,16 +186,20 @@
         <p class="text-center"><%= sanitize(message.content) %></p>
         <p class="text-center">Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
         <p class="text-center">
-        <%= link_to "Like", like_message_path(message), method: :put  %>
+        <%= link_to "Like", like_message_path(message), method: :put, class: "btn btn-xs btn-default"  %>
           
               <span class="badge"><%= message.get_upvotes.size %></span>
         </p>
         <p class="text-center">
-          <%= link_to "UnLike", unlike_message_path(message), method: :put  %>
+          <%= link_to "UnLike", unlike_message_path(message), method: :put, class: "btn btn-xs btn-default"  %>
           
               <span class="badge"><%= message.get_downvotes.size %></span>
         </p>
-        
+        <% if (message.user_id == current_user.id) || (current_user.role == "Lead") || (current_user.role == "Admin") %>
+          <p class ="text-center">
+            <%= link_to "Delete", message, method: :delete, data:  { confirm: 'Are you sure?' },  class: "btn btn-small btn-default" %>
+            </p>
+          <% end %>
       </div>
       <br>
       <% end %>
@@ -183,8 +207,10 @@
   </div>
   
 </div>
+
 <% if current_user.role != "Business" %>
-<p class="text-center">
-  <%= button_to('Post New Message', new_message_path, :method => :get, class: "btn btn-small btn-default") %>
-</p>
+<br>
+ <p class="text-center">
+  <%= link_to('Post New Message', new_message_path, :method => :get, class: "btn btn-block btn-default") %>
+ </p>
 <% end %>

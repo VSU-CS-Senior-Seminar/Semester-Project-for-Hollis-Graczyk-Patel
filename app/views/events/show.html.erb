@@ -38,17 +38,19 @@
       <div class="entry text-center">
         <p> <%= comment.content %> </p>
         <p>Posted by: <%= (User.find_by(id: comment.user_id)).name %> <%= time_ago_in_words(comment.created_at) %> ago</p>
-      </div>
-      <% if comment.user_id == current_user.id %>
-        <%= link_to "Edit", edit_event_comment_path(comment)  %>
-        <%= link_to "Delete", comment, method: :delete, data: {confirm: "Are you sure?"} %>
+        <% if comment.user_id == current_user.id %>
+        <%= link_to "Edit", edit_event_comment_path(comment), class: "btn btn-xs btn-default"  %>
+        <%= link_to "Delete", comment, method: :delete, data: {confirm: "Are you sure?"},class: "btn btn-xs btn-default"  %>
+        <br>
       <% end %>
+      </div>
     <% end %>
     <br>
   <% end %>
 </div>
 <h3>Comment On Event:</h3>
   <%= render 'event_comments/form', eventId: @event.id %>
+  <br>
 
  
-<%= link_to 'Back', home_calendar_path %>
+<%= link_to 'Back', home_calendar_path, class: "btn btn-small btn-default" %>

@@ -17,7 +17,7 @@
       <tr>   
         <td><b><%= lead.email %></b></td>
         <td><b> <%= lead.points %></b></td>
-        <td><%= link_to "Demote", home_demote_path(:id => lead.id), method: :post %></td>
+        <td><%= link_to "Demote", home_demote_path(:id => lead.id), method: :post, class: "btn btn-xs btn-default" %></td>
       </tr>
     <% end %> 
   </tbody>

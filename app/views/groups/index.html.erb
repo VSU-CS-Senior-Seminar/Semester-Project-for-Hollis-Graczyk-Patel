@@ -21,18 +21,18 @@
            <td><b><%= member.title %></b></td>
            <td><b> <%= (Group.find_by(title: member.title)).description %></b></td>
             <td>
-              <%= link_to 'Show', Group.find_by(title: member.title) %>
+              <%= link_to 'Show', Group.find_by(title: member.title), class: "btn btn-xs btn-default" %>
             </td>
             <td>
               <% if (Group.find_by(title: member.title)).user_id == current_user.id %>
-                <%= link_to 'Edit', edit_group_path(Group.find_by(title: member.title)) %> 
+                <%= link_to 'Edit', edit_group_path(Group.find_by(title: member.title)), class: "btn btn-xs btn-default" %> 
               <% else %>
                 Edit
               <% end %>
             </td>
             <td>
               <% if (Group.find_by(title: member.title)).user_id == current_user.id %>
-                <%= link_to 'Destroy', Group.find_by(title: member.title), method: :delete, data: { confirm: 'Are you sure?'} %> 
+                <%= link_to 'Destroy', Group.find_by(title: member.title), method: :delete, data: { confirm: 'Are you sure?'}, class: "btn btn-xs btn-default" %> 
               <% else %>
                 Destroy
               <% end %>

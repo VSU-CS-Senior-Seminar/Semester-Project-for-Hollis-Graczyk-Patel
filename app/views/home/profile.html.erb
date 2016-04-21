@@ -35,7 +35,11 @@
         <h3><u><%= link_to message.title,message_path(message) %></u></h3>
         <p><%= sanitize(message.content) %></p>
         <p>Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
-        
+        <% if (message.user_id == current_user.id) || (current_user.role == "Lead") || (current_user.role == "Admin") %>
+          <p class ="text-center">
+            <%= link_to "Delete", message, method: :delete, data:  { confirm: 'Are you sure?' },  class: "btn btn-small btn-default" %>
+            </p>
+          <% end %>
       </div>
       <br>
     <% end %>
@@ -45,7 +49,7 @@
       <div class="entry text-center">
         <h3><u>From: <%= (User.find_by(id: message.user_id)).email %></u></h3>
         <p><%= sanitize(message.content) %></p>
-        <p><%= link_to 'Delete Message', message, method: :delete, data: { confirm: 'Are you sure?' } %><p>
+        <p><%= link_to 'Delete Message', message, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-small btn-default" %><p>
       </div>
       <br>
     <% end %>
@@ -56,6 +60,11 @@
         <h3><u><%= link_to message.title,message_path(message) %></u></h3>
         <p><%= sanitize(message.content) %></p>
         <p>Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
+        <% if (message.user_id == current_user.id) || (current_user.role == "Lead") || (current_user.role == "Admin") %>
+          <p class ="text-center">
+            <%= link_to "Delete", message, method: :delete, data:  { confirm: 'Are you sure?' },  class: "btn btn-small btn-default" %>
+            </p>
+          <% end %>
       </div>
       <br>
     <% end %>
