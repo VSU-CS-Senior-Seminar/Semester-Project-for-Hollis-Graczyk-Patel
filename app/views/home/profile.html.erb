@@ -34,7 +34,7 @@
       <div class="entry text-center">
         <h3><u><%= link_to message.title,message_path(message) %></u></h3>
         <p><%= sanitize(message.content) %></p>
-        <p>Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
+        <p>Posted by: <%= (User.find_by(id: message.user_id)).name %></p>
         <% if (message.user_id == current_user.id) || (current_user.role == "Lead") || (current_user.role == "Admin") %>
           <p class ="text-center">
             <%= link_to "Delete", message, method: :delete, data:  { confirm: 'Are you sure?' },  class: "btn btn-small btn-default" %>
@@ -47,7 +47,7 @@
   <div id="inbox" class="tab-pane fade">
     <% @inbox.reverse.each do |message| %>
       <div class="entry text-center">
-        <h3><u>From: <%= (User.find_by(id: message.user_id)).email %></u></h3>
+        <h3><u>From: <%= (User.find_by(id: message.user_id)).name %></u></h3>
         <p><%= sanitize(message.content) %></p>
         <p><%= link_to 'Delete Message', message, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-small btn-default" %><p>
       </div>
@@ -59,7 +59,7 @@
       <div class="entry text-center">
         <h3><u><%= link_to message.title,message_path(message) %></u></h3>
         <p><%= sanitize(message.content) %></p>
-        <p>Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
+        <p>Posted by: <%= (User.find_by(id: message.user_id)).name %></p>
         <% if (message.user_id == current_user.id) || (current_user.role == "Lead") || (current_user.role == "Admin") %>
           <p class ="text-center">
             <%= link_to "Delete", message, method: :delete, data:  { confirm: 'Are you sure?' },  class: "btn btn-small btn-default" %>
@@ -71,5 +71,6 @@
   </div>
 </div>
 <p>
-  <%= button_to('Send Private Message', new_private_message_path, :method => :get, class: "btn btn-small btn-default") %>
+  <br>
+  <%= link_to('Send Private Message', new_private_message_path, :method => :get, class: "btn btn-block btn-default") %>
 </p>

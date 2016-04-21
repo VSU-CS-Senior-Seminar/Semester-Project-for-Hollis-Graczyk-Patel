@@ -4,7 +4,7 @@
         
         <h4 class="text-center" ><u><%= broadcast.title %></u></h4>
         <p class="text-center"><%= sanitize(broadcast.content) %></p>
-        <p class="text-center">Posted by: <%= (User.find_by(id: broadcast.user_id)).email %></p>
+        <p class="text-center">Posted by: <%= (User.find_by(id: broadcast.user_id)).name %></p>
         <% if broadcast.user_id == current_user.id %>
         <p class="text-center">
           <%= link_to 'Edit', edit_business_message_path(broadcast),  class: "btn btn-xs btn-default" %>

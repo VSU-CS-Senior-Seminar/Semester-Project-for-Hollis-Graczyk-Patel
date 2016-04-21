@@ -20,7 +20,7 @@ class HomeController < ApplicationController
     @privateMessages = PrivateMessage.all
     @inbox = Array.new
     @privateMessages.each do |message|
-      if message.to == current_user.email
+      if message.to == current_user.name
         @inbox.push(message)
       end
     end

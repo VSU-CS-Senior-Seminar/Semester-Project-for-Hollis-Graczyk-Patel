@@ -21,7 +21,7 @@ class PrivateMessagesController < ApplicationController
     @userEmails = Array.new
     @userArray.each do |user|
       if user.email != current_user.email
-        @userEmails.push(user.email)
+        @userEmails.push(user.name)
       end
     end
     @private_message = PrivateMessage.new

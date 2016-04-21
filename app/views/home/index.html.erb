@@ -49,7 +49,7 @@
       <div class="entry text-left">
         <h3 class="text-center"><u><%= link_to message.title,message_path(message) %></u></h3>
         <p class="text-center" ><%= sanitize(message.content) %></p>
-        <p class="text-center" >Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
+        <p class="text-center" >Posted by: <%= (User.find_by(id: message.user_id)).name %></p>
         <p class="text-center" >
         <%= link_to "Like", like_message_path(message), method: :put, class: "btn btn-xs btn-default"   %>
           
@@ -75,7 +75,7 @@
       <div class="entry text-left">
         <h3 class="text-center" ><%= link_to message.title,message_path(message) %></h3>
         <p class="text-center"><%= sanitize(message.content) %></p>
-        <p class="text-center">Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
+        <p class="text-center">Posted by: <%= (User.find_by(id: message.user_id)).name %></p>
         <p class="text-center">
         <%= link_to "Like", like_message_path(message), method: :put, class: "btn btn-xs btn-default"  %>
           
@@ -103,7 +103,7 @@
       <div class="entry text-left">
         <h3 class="text-center"><%= link_to message.title,message_path(message) %></h3>
         <p class="text-center"><%= sanitize(message.content) %></p>
-        <p class="text-center">Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
+        <p class="text-center">Posted by: <%= (User.find_by(id: message.user_id)).name %></p>
         <p class="text-center">
         <%= link_to "Like", like_message_path(message), method: :put, class: "btn btn-xs btn-default"  %>
           
@@ -130,7 +130,7 @@
       <div class="entry text-left">
         <h3 class="text-center"><%= link_to message.title,message_path(message) %></h3>
         <p class="text-center"><%= sanitize(message.content) %></p>
-        <p class="text-center">Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
+        <p class="text-center">Posted by: <%= (User.find_by(id: message.user_id)).name %></p>
         <p class="text-center">
         <%= link_to "Like", like_message_path(message), method: :put, class: "btn btn-xs btn-default"  %>
           
@@ -157,7 +157,7 @@
       <div class="entry text-left">
         <h3 class="text-center"><%= link_to message.title,message_path(message) %></h3>
         <p class="text-center"><%= sanitize(message.content) %></p>
-        <p class="text-center">Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
+        <p class="text-center">Posted by: <%= (User.find_by(id: message.user_id)).name %></p>
         <p class="text-center">
         <%= link_to "Like", like_message_path(message), method: :put, class: "btn btn-xs btn-default"  %>
           
@@ -184,7 +184,7 @@
       <div class="entry text-left">
         <h3 class="text-center"><%= link_to message.title,message_path(message) %></h3>
         <p class="text-center"><%= sanitize(message.content) %></p>
-        <p class="text-center">Posted by: <%= (User.find_by(id: message.user_id)).email %></p>
+        <p class="text-center">Posted by: <%= (User.find_by(id: message.user_id)).name %></p>
         <p class="text-center">
         <%= link_to "Like", like_message_path(message), method: :put, class: "btn btn-xs btn-default"  %>
           
