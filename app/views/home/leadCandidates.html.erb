@@ -7,17 +7,19 @@
 <table class="table text-center"> 
   <thead>
     <tr>
-      <td><b>Email</b></td> 
-      <td><b>Points</b></td>
+      <th>Name</th>
+      <th>Email</th> 
+      <th>Points</th>
       <th>Promote</th>
    </tr>
   </thead>
   <tbody>
     <% @possibleLeads.each do |user| %>
       <tr>   
+        <td><b><%= user.name %></b></td>
         <td><b><%= user.email %></b></td>
         <td><b> <%= user.points %></b></td>
-        <td><%= link_to "Promote", home_promote_path(:id => user.id), method: :post %></td>
+        <td><%= link_to "Promote", home_promote_path(:id => user.id), method: :post, class: "btn btn-xs btn-default" %></td>
       </tr>
     <% end %> 
   </tbody>

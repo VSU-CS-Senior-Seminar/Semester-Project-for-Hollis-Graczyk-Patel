@@ -1,5 +1,4 @@
 class EventsController < ApplicationController
-  layout "profile"
   
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :moderator_only, only: [:index, :new, :edit]

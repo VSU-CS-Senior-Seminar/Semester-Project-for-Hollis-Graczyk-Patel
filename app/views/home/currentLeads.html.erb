@@ -7,14 +7,16 @@
 <table class="table text-center"> 
   <thead>
     <tr>
-      <td><b>Email</b></td> 
-      <td><b>Points</b></td>
+      <th>Name</th>
+      <th>Email</th> 
+      <th>Points</th>
       <th>Demote</th>
    </tr>
   </thead>
   <tbody>
     <% @leads.each do |lead| %>
-      <tr>   
+      <tr>
+        <td><b><%= lead.name %></b></td>   
         <td><b><%= lead.email %></b></td>
         <td><b> <%= lead.points %></b></td>
         <td><%= link_to "Demote", home_demote_path(:id => lead.id), method: :post, class: "btn btn-xs btn-default" %></td>

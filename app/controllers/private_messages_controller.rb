@@ -17,7 +17,7 @@ class PrivateMessagesController < ApplicationController
 
   # GET /private_messages/new
   def new
-    @userArray = User.all
+    @userArray = User.where.not(role: 2)
     @userEmails = Array.new
     @userArray.each do |user|
       if user.email != current_user.email

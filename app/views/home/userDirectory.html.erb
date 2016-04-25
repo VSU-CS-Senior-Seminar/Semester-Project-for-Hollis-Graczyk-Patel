@@ -2,21 +2,25 @@
 <p id="notice"><%= notice %></p>
 <% end %>
 
-<h1>User Directory</h1>
+<h1><u>User Directory</u></h1>
 
 <table class="table text-center"> 
   <thead>
     <tr>
-      <td><b>Email</b></td> 
-      <th>Delete</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Remove User</th>
    </tr>
   </thead>
   <tbody>
     <% @users.each do |user| %>
       <% if ((user.role != "Admin") && (user.id != current_user.id)) %>
-      <tr>   
+      <tr>
+        <td><b><%= user.name %></b></td>   
         <td><b><%= user.email %></b></td>
-        <td><%= link_to "Destroy", destroy_user_path(user), method: :delete, data: { confirm: "You sure?" }, class: "btn btn-xs btn-default" %></td>
+        <td><b><%= user.role %></b></td>
+        <td><%= link_to "Remove", destroy_user_path(user), method: :delete, data: { confirm: "You sure?" }, class: "btn btn-xs btn-default" %></td>
       </tr>
       <% end %>
     <% end %> 
