@@ -6,9 +6,9 @@ User.create( :email => 'admin@fnd.com', :password => 'adminpass', :password_conf
 User.create( :email => 'happytree@hotmail.com', :password => 'treepass', :password_confirmation => 'treepass', :role => "User", :points => 59, :name => "Cassandra	Wilson", :address => "142 Sunnymeade Drive")
 User.create( :email => 'polarbear@gmail.com', :password => 'icecold10', :password_confirmation => 'icecold10', :role => "User", :points => 71, :name => "Sergio	Brooks", :address => "132 Sunnymeade Drive")
 User.create( :email => 'yellowrabbit@yahoo.com', :password => 'wyth133s', :password_confirmation => 'wyth133s', :role => "User", :points => 22, :name => "Aaron	Horton", :address => "126 Sunnymeade Drive")
-User.create( :email => 'viktor@hotmail.com', :password => 'password', :password_confirmation => 'password', :role => "User", :points => 25, :name => "Viktor Graczyk", :address => "202 Fairview Drive")
-User.create( :email => 'michael@hotmail.com', :password => 'password', :password_confirmation => 'password', :role => "User", :points => 48, :name => "Michael Hollis", :address => "203 Fairview Drive")
-User.create( :email => 'akshay@hotmail.com', :password => 'password', :password_confirmation => 'password', :role => "User", :points => 60, :name => "Akshay Patel", :address => "201 Fairview Drive")
+User.create( :email => 'viktor@hotmail.com', :password => 'password', :password_confirmation => 'password', :role => "Lead", :points => 101, :name => "Viktor Graczyk", :address => "202 Fairview Drive")
+User.create( :email => 'michael@hotmail.com', :password => 'password', :password_confirmation => 'password', :role => "Lead", :points => 102, :name => "Michael Hollis", :address => "203 Fairview Drive")
+User.create( :email => 'akshay@hotmail.com', :password => 'password', :password_confirmation => 'password', :role => "Lead", :points => 103, :name => "Akshay Patel", :address => "201 Fairview Drive")
 User.create( :email => 'clothesminded@gmail.com', :password => 'clothpass', :password_confirmation => 'clothpass', :role => "Business", :points => 0, :name => "Clothes Minded", :address => "100 Starmount Avenue")
 User.create( :email => 'abcmarkets@yahoo.com', :password => 'marketpass', :password_confirmation => 'marketpass', :role => "Business", :points => 0, :name => "ABC Markets", :address => "305 Starmount Avenue")
 User.create( :email => 'hoa@hotmail.com', :password => 'homeassociation', :password_confirmation => 'homeassociation', :role => "Business", :points => 0, :name => "Home Owners Association", :address => "133 Hayfield Lane")
@@ -69,9 +69,9 @@ BusinessMessage.create!(title: 'HOA Official Meeting',
                         content: 'We will be hosting a community get-together this May 1st, we encourage all members to come and talk about current policies and issues that need to be addressed. We look forward to seeing you all there!', 
                         user_id: hoa_id)
 #Private Messages
-PrivateMessage.create!(user_id: vik_id,
+PrivateMessage.create!(user_id: aaron_id,
                        to: 'John Smith',
-                       content: 'Please add my brother to this website: Vlad Graczyk at 202 Fairview Drive, his email is: vograczyk@valdosta.edu')
+                       content: 'Please add my friend to this website: Vlad Graczyk at 202 Fairview Drive, his email is: vograczyk@valdosta.edu')
 PrivateMessage.create!(user_id: cass_id,
                        to: 'John Smith',
                        content: 'Just wanted to ask if you could consider me for a lead position, I would do a lot of good for this site!')
